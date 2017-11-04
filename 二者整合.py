@@ -7,13 +7,13 @@
 #子账户下 比如一个信息
 #--------------------函数定义区--------------------------
 #------------如果输入为q就是退出-------------------
-def break_it_now(x):
-    if x=='q':
-        break
-
-def continue_it_now(x):
-    if x=='q':
-        continue
+# def break_it_now(x):
+#     if x=='q':
+#         break
+#
+# def continue_it_now(x):
+#     if x=='q':
+#         continue
 
 #------------------打印资产负债表----------------------------------
 def print_balancesheet(x):#x=time_of_start
