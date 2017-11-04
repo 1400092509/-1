@@ -32,18 +32,19 @@ balancesheet += '资产:' + ' ' * (52 - len('资产')) + '|' + '负债:'+' '*(52
 资产负债表.setdefault('资产',{})
 资产负债表.setdefault('负债',{})
 for i in all_information['账户']:
-    all_information['账户'][i].setdefault('属性','')#以后加入属性的直接添加
+    all_information['账户'][i].setdefault('属性','')#一次性添加 余额,流动性.排名,
+    数值与属性=[]
     判断=all_information['账户'][i]['属性']
     if 判断=='资产':
-        资产负债表['资产'].setdefault(i,all_information['账户'][i]['余额'])
-        资产负债表['资产'][i]=all_information['账户'][i]['余额']
+        数值与属性.append(all_information['账户'][i]['余额'])
+        数值与属性.append(all_information['账户'][i]['流动性'][0])
+        数值与属性.append(all_information['账户'][i]['流动性'][1])
+        资产负债表['资产'].setdefault(i,数值与属性)
     if 判断=='负债':
-        资产负债表['负债'].setdefault(i,all_information['账户'][i]['余额'])
-        资产负债表['负债'][i]=all_information['账户'][i]['余额']
+        数值与属性.append(all_information['账户'][i]['余额'])
+        数值与属性.append(all_information['账户'][i]['流动性'][0])
+        数值与属性.append(all_information['账户'][i]['流动性'][1])
+        资产负债表['负债'].setdefault(i,数值与属性)
 
-
-        
-资产排序=sorted(资产负债表['资产'].items(),key=lambda x:x[0],reverse=True)
-print(资产排序)
-
-
+for i in 资产负债表:#有资产和负债两个项目
+    for ii in

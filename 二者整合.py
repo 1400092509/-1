@@ -340,20 +340,45 @@ while True:
         if str(information)=='1':
             flag_all_account_edit=True
             flag_account_edit=False
+            information=''
             break
         if str(information)=='2':
             flag_all_account_edit=False
             flag_account_edit=True
+            information = ''
             break
         if information=='q':
-            exit('程序已经退出,感谢你的使用,作者"LIN SHIH-WAI,版本0.1v')
+            information = ''
             save_dict(all_account_input, '保存')
             save_dict(all_information, '资产类型记录器.txt')
+            exit('程序已经退出,感谢你的使用,作者"LIN SHIH-WAI,版本0.1v')
+
 
 
     #--------------------------------单账户操作.------------------------
     while flag_account_edit:
-        account_add=input('请输入要添加的账号名[q]回到主目录:')#添加帐户名
+        del_it_now=' '
+        account_add=input('请输入要添加的账号名:[q]回到主目录,[p]打印所有的项目并且制定删除')#添加帐户名
+        #---------------删除--------------------
+        if account_add=='p':
+            while True:
+                str1=' '
+                for i in all_information['账户']:
+                    if '属性' in all_information['账户'][i]:
+                        add_shuxing_and_check(i)
+                        str1+='%10s %30s %20s %12s'%(i,all_information['账户'][i]['属性'],all_information['账户'][i]['流动性'][0],all_information['账户'][i]['流动性'][1])
+                        str1+='\n'
+                print(str1)
+                del_it_now=input('选择要删除的账户:q退出')
+                if del_it_now in all_information['账户']:
+                    all_information['账户'].pop(del_it_now)
+                    save_dict(all_information, '资产类型记录器.txt')
+                    continue
+                if del_it_now=='q':
+                    break
+        if del_it_now=='q':
+            continue
+        #--------------------删除------------------
         if account_add=='q':
             break
         if account_add not in all_information['账户']:
