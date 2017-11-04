@@ -358,8 +358,39 @@ while True:
     #--------------------------------单账户操作.------------------------
     while flag_account_edit:
         del_it_now=' '
-        account_add=input('请输入要添加的账号名:[q]回到主目录,[p]打印所有的项目并且制定删除')#添加帐户名
+        account_add=' '
+        account_add=input('请输入要添加的账号名:[q]回到主目录,[p]打印所有的项目并且制定删除,[f]快速整合输入系统(一次性建立一个完整条目)')#添加帐户名
         #---------------删除--------------------
+        if account_add=='f':
+            while True:
+                enter_informaiton=input('[q]退出请准确无误的输入不能有多余空格,顺序:名称 属性 流动性属性 流动性排名,输入格式例如:cash 资产 流动资产 1:\n')
+                if enter_informaiton=='q':
+                    break
+                enter_informaiton=enter_informaiton.split(' ')
+                print(enter_informaiton)
+                if len(enter_informaiton)==4:
+                    all_information['账户'].setdefault(enter_informaiton[0],{})
+                    all_information['账户'][enter_informaiton[0]].setdefault('debt',{})
+                    all_information['账户'][enter_informaiton[0]].setdefault('credit',{})
+                    all_information['账户'][enter_informaiton[0]].setdefault('属性',enter_informaiton[1])
+                    all_information['账户'][enter_informaiton[0]]['属性']=enter_informaiton[1]
+                    all_information['账户'][enter_informaiton[0]].setdefault('流动性',[])
+                    all_information['账户'][enter_informaiton[0]]['流动性']=[]
+                    all_information['账户'][enter_informaiton[0]]['流动性'].append(enter_informaiton[2])
+                    all_information['账户'][enter_informaiton[0]]['流动性'].append(enter_informaiton[3])
+                    save_dict(all_account_input, '保存')
+                    save_dict(all_information, '资产类型记录器.txt')
+                if len(enter_informaiton)!=4:
+                    print('输入错误 还好及时阻止否则程序崩溃')
+                    continue
+        if enter_informaiton=='q':
+            enter_informaiton==' '
+            break
+
+
+
+
+
         if account_add=='p':
             while True:
                 str1=' '
