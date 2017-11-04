@@ -44,8 +44,10 @@ def clear_and_put_account(x):#x是编制日期
     for i in all_information['账户']:#清洗所有账户下的debt和credit.
         all_information['账户'][i].setdefault('credit',{})
         all_information['账户'][i].setdefault('debt', {})
+        all_information['账户'][i].setdefault('余额', 0)
         all_information['账户'][i]['credit'].clear()
         all_information['账户'][i]['debt'].clear()
+        all_information['账户'][i]['余额']=0
     if x in all_account_input:#如果在保存中导入到每个单独的账户中.
         for kia in all_account_input[x]:#得到每个日期.
             for xcv in all_account_input[x][kia]:#到了借贷目录
@@ -365,6 +367,8 @@ while True:
             if information_type=='c':
                 all_information['账户'][account_add]['debt'].clear()
                 all_information['账户'][account_add]['credit'].clear()
+                all_information['账户'][account_add]['余额']=0
+
                 print_account(account_add)
                 continue
             if information_type=='q':
