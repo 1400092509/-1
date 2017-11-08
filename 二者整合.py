@@ -29,15 +29,6 @@ def print_balancesheet(x):#x=time_of_start
 
 
 
-
-
-
-
-
-
-
-
-
 #--------当在日记编辑中输入了 编制日期,然后清空所有的单个帐户表.外加从该日期中读取.
 
 def clear_and_put_account(x):#x是编制日期
@@ -359,10 +350,12 @@ while True:
     while flag_account_edit:
         del_it_now=' '
         account_add=' '
+        enter_informaiton = ''
         account_add=input('请输入要添加的账号名:[q]回到主目录,[p]打印所有的项目并且制定删除,[f]快速整合输入系统(一次性建立一个完整条目)')#添加帐户名
         #---------------删除--------------------
         if account_add=='f':
             while True:
+
                 enter_informaiton=input('[q]退出请准确无误的输入不能有多余空格,顺序:名称 属性 流动性属性 流动性排名,输入格式例如:cash 资产 流动资产 1:\n')
                 if enter_informaiton=='q':
                     break
@@ -505,29 +498,39 @@ while True:
                         continue
                 account_type=input('请输入[1]debt或者[2]credit:')
                 account_money=input('请输入金额:')
-                if str(account_type)=='1':
-                    account_type='debt'
-                if str(account_type)=='2':
-                    account_type='credit'
-                all_account_input[time_of_start][account_time].setdefault(account_type,{})
-                if account_name not in all_account_input[time_of_start][account_time][account_type]:
-                    all_account_input[time_of_start][account_time][account_type].setdefault(account_name,account_money)
-                if account_name in all_account_input[time_of_start][account_time][account_type]:
-                    all_account_input[time_of_start][account_time][account_type][account_name]=account_money
-                if account_name not in all_information['账户']:
-                    all_information['账户'].setdefault(account_name,{})
-                    all_information['账户'][account_name].setdefault('debt',{})
-                    all_information['账户'][account_name].setdefault('credit',{})
-                if str(account_type)=='debt':
-                    if account_time not in all_information['账户'][account_name]['debt']:
-                        all_information['账户'][account_name][account_type].setdefault(account_time,int(account_money))
-                    if account_time not in all_information['账户'][account_name]['debt']:
-                        all_information['账户'][account_name][account_type][account_time]=int(account_money)
-                if str(account_type) == 'credit':
-                    if account_time not in all_information['账户'][account_name]['credit']:
-                        all_information['账户'][account_name][account_type].setdefault(account_time, int(account_money))
-                    if account_time not in all_information['账户'][account_name]['credit']:
-                        all_information['账户'][account_name][account_type][account_time] = int(account_money)
+                if account_type.isdigit():
+                    if str(account_type)=='1':
+                        account_type='debt'
+                    if str(account_type)=='2':
+                        account_type='credit'
+                    all_account_input[time_of_start][account_time].setdefault(account_type,{})
+                    if account_name not in all_account_input[time_of_start][account_time][account_type]:
+                        all_account_input[time_of_start][account_time][account_type].setdefault(account_name,account_money)
+                    if account_name in all_account_input[time_of_start][account_time][account_type]:
+                        all_account_input[time_of_start][account_time][account_type][account_name]=account_money
+                    if account_name not in all_information['账户']:
+                        all_information['账户'].setdefault(account_name,{})
+                        all_information['账户'][account_name].setdefault('debt',{})
+                        all_information['账户'][account_name].setdefault('credit',{})
+                    if str(account_type)=='debt':
+                        if account_time not in all_information['账户'][account_name]['debt']:
+                            all_information['账户'][account_name][account_type].setdefault(account_time,int(account_money))
+                        if account_time not in all_information['账户'][account_name]['debt']:
+                            all_information['账户'][account_name][account_type][account_time]=int(account_money)
+                    if str(account_type) == 'credit':
+                        if account_time not in all_information['账户'][account_name]['credit']:
+                            all_information['账户'][account_name][account_type].setdefault(account_time, int(account_money))
+                        if account_time not in all_information['账户'][account_name]['credit']:
+                            all_information['账户'][account_name][account_type][account_time] = int(account_money)
+
+                    if account_money.isdigit():
+                        if int(account_money) == 0:
+                            if account_name in all_account_input[time_of_start][account_time][account_type]:
+                                del all_account_input[time_of_start][account_time][account_type][account_name]
+                            else:
+                                continue
+                else:
+                    continue
                     # ------------------------账户属性的添加-----------------------------------------
                 add_shuxing_and_check(account_name)
                 accounting_print(time_of_start)
