@@ -10,6 +10,8 @@ https://www.python.org/downloads/release/python-363/
 建议下载64位的python
 Windows x86-64 executable installer
 
+下载里面的 二者整合.py 资产类型记录器.txt 保存.txt就可以运行程序了 (要放在同目录中)
+
 2.安装完成以后运行 二者整合(运行前需要下载,保存和资产类型记录器两个txt文件,否则程序会闪退)
 
 
