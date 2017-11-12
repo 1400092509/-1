@@ -2,11 +2,8 @@
 #date:  2017/10/30
 
 import os
-fi_list=os.listdir()
-if '保存.txt' not in fi_list:
-    open('保存.txt','a+',encoding='utf-8')
-if '资产类型记录器.txt' not in fi_list:
-    open('资产类型记录器.txt','a+',encoding='utf-8')
+
+
 #字典形式all_information第一层 key财务报表,子账户
 #财务报表第key资产负债表,利润表,现金流表,
 # 子账户key各类账户
@@ -48,6 +45,8 @@ def clear_and_put_account(x):#x是编制日期
     if x in all_account_input:#如果在保存中导入到每个单独的账户中.
         for kia in all_account_input[x]:#得到每个日期.
             for xcv in all_account_input[x][kia]:#到了借贷目录
+                if xcv == '描述':
+                    continue
                 for acc in all_account_input[x][kia][xcv]:#得到具体的账户.
                     # acc#帐户名
                     # all_account_input[x][kia][xcv][acc]#是金额
@@ -332,6 +331,20 @@ flag_all_account_edit=False
 while True:
     loading_dict('保存.txt')
     loading_dict_all_information('资产类型记录器.txt')
+    save_dict(all_account_input, '保存.txt')
+    save_dict(all_information, '资产类型记录器.txt')
+
+
+    # fi_list = os.listdir()
+    # if '保存.txt' not in fi_list:
+    #     open('保存.txt', 'a+', encoding='utf-8')
+    # if '资产类型记录器.txt' not in fi_list:
+    #     open('资产类型记录器.txt', 'a+', encoding='utf-8')
+    # if '保存.txt' in fi_list:
+    #     loading_dict('保存.txt')
+    # if '资产类型记录器.txt' not in fi_list:
+    #     loading_dict_all_information('资产类型记录器.txt')
+
     while True:
         information=input('[1]日记账模式,[2]单账户操作,[3]生成财务报表,[q]退出程序]:')
         if str(information)=='1':
@@ -402,6 +415,7 @@ while True:
                 del_it_now=input('选择要删除的账户:q退出')
                 if del_it_now in all_information['账户']:
                     all_information['账户'].pop(del_it_now)
+                    save_dict(all_account_input, '保存.txt')
                     save_dict(all_information, '资产类型记录器.txt')
                     continue
                 if del_it_now=='q':
@@ -448,6 +462,8 @@ while True:
                 all_information['账户'][account_add][information_type].setdefault(data_input,0)
                 how_much=int(input('请输入金额数量:'))
                 all_information['账户'][account_add][information_type][data_input]=how_much
+                save_dict(all_account_input, '保存.txt')
+                save_dict(all_information, '资产类型记录器.txt')
             else:
                 print('必须输入1和2')
 

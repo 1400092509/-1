@@ -1,0 +1,1 @@
+{'bubuling': {'2012.12.12': {'debt': {'cash': '200000'}, 'credit': {'equipment': '200000'}}}}
