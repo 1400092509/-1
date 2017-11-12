@@ -2,8 +2,11 @@
 #date:  2017/10/30
 
 import os
-
-
+fi_list=os.listdir()
+if '保存.txt' not in fi_list:
+    open('保存.txt','a+',encoding='utf-8')
+if '资产类型记录器.txt' not in fi_list:
+    open('资产类型记录器.txt','a+',encoding='utf-8')
 #字典形式all_information第一层 key财务报表,子账户
 #财务报表第key资产负债表,利润表,现金流表,
 # 子账户key各类账户
@@ -327,19 +330,8 @@ flag_all_account_edit=False
 
 #------------------------------------------主目录区------------------------------------------------
 while True:
-    # loading_dict('保存.txt')
-    # loading_dict_all_information('资产类型记录器.txt')
-
-
-    fi_list = os.listdir()
-    if '保存.txt' not in fi_list:
-        open('保存.txt', 'a+', encoding='utf-8')
-    if '资产类型记录器.txt' not in fi_list:
-        open('资产类型记录器.txt', 'a+', encoding='utf-8')
-    if '保存.txt' in fi_list:
-        loading_dict('保存.txt')
-    if '资产类型记录器.txt' not in fi_list:
-        loading_dict_all_information('资产类型记录器.txt')
+    loading_dict('保存.txt')
+    loading_dict_all_information('资产类型记录器.txt')
     while True:
         information=input('[1]日记账模式,[2]单账户操作,[3]生成财务报表,[q]退出程序]:')
         if str(information)=='1':
