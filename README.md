@@ -1,6 +1,10 @@
 设计者:LIN SHIH WAI(北京大学 14级经济学院 金融系本科生 林士伟)
 有任何问题联系我的邮箱:1400092509@pku.edu.cn
 程序的视频教学:
+
+            日记账的使用http://v.youku.com/v_show/id_XMzE1MjQ0MTk4MA==.html
+            单账户的操作http://v.youku.com/v_show/id_XMzE1MjQ2MzI2MA==.html
+
 设计目的:为了更好的帮助老师讲课和学生更好的学习而设计的会计程序
 
 
